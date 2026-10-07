@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@theme {
+  --color-forest: #1f3d2b;
+  --color-moss: #4f7a4a;
+  --color-cream: #f6f1e7;
+  --color-mist: #e8efe6;
+  --color-turmeric: #e0a526;
+  --color-earth: #5b4636;
+  --color-ink: #1b1b18;
+
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-jakarta), system-ui, sans-serif;
+
+  /* Fluid heading sizes */
+  --text-display: clamp(2.75rem, 1.5rem + 5vw, 5.75rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.025em;
+  --text-h2: clamp(2.1rem, 1.5rem + 2.4vw, 3.6rem);
+  --text-h2--line-height: 1.06;
+  --text-h2--letter-spacing: -0.02em;
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-rise: rise 0.9s var(--ease-soft) both;
+  --animate-shimmer: shimmer 1.4s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+  }
+  @keyframes float {
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+  @keyframes shimmer {
+    to {
+      background-position: -200% 0;
+    }
+  }
+}
+
+@layer base {
+  /* Header height before JavaScript measures it (Header.js keeps it updated) */
+  :root {
+    --header-h: 4.5rem;
+  }
+  @media (min-width: 1024px) {
+    :root {
+      --header-h: 5rem;
+    }
+  }
+  html {
+    scrollbar-gutter: stable;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Subtle paper grain over the whole site */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-moss);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .wrap {
+      padding-inline: 2rem;
+    }
+  }
+  /* Full-width scroll rows whose first item lines up with .wrap content */
+  .bleed-x {
+    padding-inline: max(1.25rem, calc((100% - 1280px) / 2 + 1.25rem));
+    scroll-padding-inline: max(1.25rem, calc((100% - 1280px) / 2 + 1.25rem));
+  }
+  @media (min-width: 768px) {
+    .bleed-x {
+      padding-inline: max(2rem, calc((100% - 1280px) / 2 + 2rem));
+      scroll-padding-inline: max(2rem, calc((100% - 1280px) / 2 + 2rem));
+    }
+  }
+  .section {
+    padding-block: 5rem;
+  }
+  @media (min-width: 1024px) {
+    .section {
+      padding-block: 7.5rem;
+    }
+  }
+  .eyebrow {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-earth);
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Fade-in on every page; app/template.js remounts on navigation, so it replays.
+     No fill mode: a filling opacity animation would keep a stacking context around
+     the whole page, and fixed overlays inside it could not rise above the header. */
+  .page-fade {
+    animation: page-in 0.5s ease-out;
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-fade,
+  .animate-rise {
+    animation: none;
+  }
+}
