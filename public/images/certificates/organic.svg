@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1100" color="#1F3D2B">
+<rect width="800" height="1100" fill="#FBF8F1"/>
+<rect x="30" y="30" width="740" height="1040" fill="none" stroke="#1F3D2B" stroke-width="6"/>
+<rect x="48" y="48" width="704" height="1004" fill="none" stroke="#1F3D2B" stroke-opacity=".5" stroke-width="1.5"/>
+<g fill="#E0A526">
+<path d="M48 48 h40 l-40 40 Z"/><path d="M752 48 h-40 l40 40 Z"/><path d="M48 1052 h40 l-40 -40 Z"/><path d="M752 1052 h-40 l40 -40 Z"/>
+</g>
+<g transform="translate(400 150)"><circle r="46" fill="#1F3D2B"/><g transform="scale(.75)"><path d="M-30 30 C -34 -16 -4 -36 34 -34 C 36 4 16 34 -30 30 Z" fill="#F6F1E7"/><path d="M-30 30 L 18 -18" stroke-width="4" stroke="currentColor" stroke-linecap="round"/></g></g>
+<text x="400" y="262" text-anchor="middle" font-family="Georgia, serif" font-size="44" letter-spacing="10" fill="#1F3D2B">CERTIFICATE</text>
+<text x="400" y="320" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="32" fill="#5B4636">Organic Certification</text>
+<path d="M300 356 H500" stroke="#E0A526" stroke-width="3"/>
+<text x="400" y="404" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#5B4636">This is to certify that</text>
+<rect x="140" y="430" width="520" height="10" rx="5" fill="#1F3D2B" opacity=".1"/><rect x="165" y="464" width="470" height="10" rx="5" fill="#1F3D2B" opacity=".1"/><rect x="130" y="498" width="540" height="10" rx="5" fill="#1F3D2B" opacity=".1"/><rect x="200" y="532" width="400" height="10" rx="5" fill="#1F3D2B" opacity=".1"/><rect x="150" y="566" width="500" height="10" rx="5" fill="#1F3D2B" opacity=".1"/><rect x="175" y="600" width="450" height="10" rx="5" fill="#1F3D2B" opacity=".1"/><rect x="250" y="634" width="300" height="10" rx="5" fill="#1F3D2B" opacity=".1"/>
+<g transform="translate(210 860)">
+<circle r="78" fill="#1F3D2B"/>
+<circle r="64" fill="none" stroke="#F6F1E7" stroke-opacity=".5" stroke-width="2" stroke-dasharray="3 6"/>
+<g transform="scale(.7)"><path d="M-30 30 C -34 -16 -4 -36 34 -34 C 36 4 16 34 -30 30 Z" fill="#F6F1E7"/><path d="M-30 30 L 18 -18" stroke-width="4" stroke="currentColor" stroke-linecap="round"/></g>
+</g>
+<path d="M440 900 C 470 860 500 920 530 880 S 590 870 610 890" fill="none" stroke="#1F3D2B" stroke-opacity=".55" stroke-width="2.5"/>
+<path d="M420 920 H640" stroke="#1F3D2B" stroke-opacity=".4" stroke-width="1.5"/>
+<rect x="470" y="936" width="120" height="8" rx="4" fill="#1F3D2B" opacity=".12"/>
+<text x="400" y="1010" text-anchor="middle" font-family="Georgia, serif" font-size="18" fill="#5B4636">Placeholder · replace with the scanned certificate</text>
+</svg>

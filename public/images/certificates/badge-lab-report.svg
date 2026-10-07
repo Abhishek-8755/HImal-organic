@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" color="#5B4636">
+<circle cx="120" cy="120" r="116" fill="#5B4636"/>
+<circle cx="120" cy="120" r="100" fill="none" stroke="#F6F1E7" stroke-opacity=".5" stroke-width="2" stroke-dasharray="3 7"/>
+<circle cx="120" cy="120" r="86" fill="none" stroke="#F6F1E7" stroke-opacity=".25" stroke-width="1.5"/>
+<g transform="translate(120 100)"><path d="M-10 -36 H10 M-7 -36 V-10 L-30 28 C-33 34 -29 38 -23 38 H23 C29 38 33 34 30 28 L7 -10 V-36" fill="#F6F1E7" stroke="#F6F1E7" stroke-width="5" stroke-linejoin="round"/><path d="M-20 18 H20" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></g>
+<text x="120" y="172" text-anchor="middle" font-family="Georgia, serif" font-size="17" font-weight="700" letter-spacing="2.5" fill="#F6F1E7">LAB TESTED</text>
+</svg>

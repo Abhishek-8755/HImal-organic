@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" color="#1F3D2B">
+<circle cx="120" cy="120" r="116" fill="#1F3D2B"/>
+<circle cx="120" cy="120" r="100" fill="none" stroke="#F6F1E7" stroke-opacity=".5" stroke-width="2" stroke-dasharray="3 7"/>
+<circle cx="120" cy="120" r="86" fill="none" stroke="#F6F1E7" stroke-opacity=".25" stroke-width="1.5"/>
+<g transform="translate(120 100)"><path d="M-30 30 C -34 -16 -4 -36 34 -34 C 36 4 16 34 -30 30 Z" fill="#F6F1E7"/><path d="M-30 30 L 18 -18" stroke-width="4" stroke="currentColor" stroke-linecap="round"/></g>
+<text x="120" y="172" text-anchor="middle" font-family="Georgia, serif" font-size="17" font-weight="700" letter-spacing="2.5" fill="#F6F1E7">ORGANIC</text>
+</svg>
