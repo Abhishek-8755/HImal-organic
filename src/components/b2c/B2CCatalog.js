@@ -2,14 +2,15 @@
 
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { useLenis } from "lenis/react";
 import { ArrowUpDown, ChevronDown, Search, X } from "lucide-react";
+import PillGroup from "@/components/PillGroup";
 import ProductCard from "@/components/ProductCard";
+import ProductGrid from "@/components/ProductGrid";
 import QuickViewDrawer from "@/components/b2c/QuickViewDrawer";
 import { CATEGORIES, categoryLabel } from "@/data/site";
 
-const EASE = [0.22, 1, 0.36, 1];
 const TYPES = [
   { value: "all", label: "All" },
   { value: "raw", label: "Raw" },
@@ -38,33 +39,6 @@ function writeCategoryToUrl(slug) {
   window.history.replaceState(null, "", `${url.pathname}${url.search}`);
 }
 
-// Pill buttons with one active background that slides between them
-function PillGroup({ label, options, value, onChange, layoutId, className = "", pillClass, activeText, idleText }) {
-  return (
-    <div role="group" aria-label={label} className={className}>
-      {options.map((o) => {
-        const active = o.value === value;
-        return (
-          <button
-            key={o.value}
-            type="button"
-            aria-pressed={active}
-            onClick={() => onChange(o.value)}
-            className={`relative shrink-0 snap-start whitespace-nowrap rounded-full px-2.5 py-2.5 text-sm font-semibold transition-colors sm:px-4 ${
-              active ? activeText : idleText
-            }`}
-          >
-            {active && (
-              <motion.span layoutId={layoutId} className={`absolute inset-0 rounded-full ${pillClass}`} transition={{ duration: 0.45, ease: EASE }} />
-            )}
-            <span className="relative">{o.label}</span>
-          </button>
-        );
-      })}
-    </div>
-  );
-}
-
 function EmptyState({ onClear }) {
   return (
     <div className="flex flex-col items-center py-20 text-center">
@@ -80,7 +54,7 @@ function EmptyState({ onClear }) {
       <button
         type="button"
         onClick={onClear}
-        className="mt-7 inline-flex min-h-12 items-center rounded-full bg-forest px-7 font-semibold text-cream transition-colors hover:bg-moss"
+        className="mt-7 inline-flex min-h-12 items-center rounded-full bg-forest px-7 font-semibold text-cream transition-colors hover:bg-pine"
       >
         Clear filters
       </button>
@@ -276,23 +250,13 @@ export default function B2CCatalog({ products }) {
         {visible.length === 0 ? (
           <EmptyState onClear={clearFilters} />
         ) : (
-          <ul className="relative mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {/* initial={false}: cards in the static HTML are visible straight away */}
-            <AnimatePresence initial={false} mode="popLayout">
-              {visible.map((product, i) => (
-                <motion.li
-                  key={product.slug}
-                  layout
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96, transition: { duration: 0.2 } }}
-                  transition={{ duration: 0.45, ease: EASE, delay: Math.min(i, 8) * 0.03 }}
-                >
-                  <ProductCard product={product} mode="b2c" highlight={search} onQuickView={setQuickView} />
-                </motion.li>
-              ))}
-            </AnimatePresence>
-          </ul>
+          <ProductGrid
+            className="mt-6"
+            products={visible}
+            renderCard={(product) => (
+              <ProductCard product={product} mode="b2c" highlight={search} onQuickView={setQuickView} />
+            )}
+          />
         )}
       </section>
 

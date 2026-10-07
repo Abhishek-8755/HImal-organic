@@ -5,6 +5,7 @@ import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-mot
 import { Microscope, Package, Sprout, Truck } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
+import Stepper from "@/components/Stepper";
 import usePrefersReducedMotion from "@/lib/usePrefersReducedMotion";
 
 const STEPS = [
@@ -22,27 +23,7 @@ function SimpleJourney({ className = "" }) {
     <section className={`section ${className}`}>
       <div className="wrap">
         <Reveal>{heading}</Reveal>
-        <div className="relative mt-14">
-          {/* Dashed line from the first icon's centre to the last one's (4 columns, 2.5rem gaps) */}
-          <div
-            aria-hidden="true"
-            className="absolute left-8 right-[calc((100%_-_7.5rem)/4_-_2rem)] top-8 hidden border-t-2 border-dashed border-forest/25 lg:block"
-          />
-          <ol className="relative grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {STEPS.map(({ Icon, title, text }, i) => (
-              <li key={title}>
-                <Reveal delay={i * 0.1}>
-                  <span className="grid size-16 place-items-center rounded-full bg-cream text-forest ring-1 ring-forest/20">
-                    <Icon className="size-7" strokeWidth={1.5} aria-hidden="true" />
-                  </span>
-                  <p className="eyebrow mt-7">Step 0{i + 1}</p>
-                  <h3 className="mt-2 font-display text-[1.75rem] text-forest">{title}</h3>
-                  <p className="mt-2 max-w-[16rem] text-ink/75">{text}</p>
-                </Reveal>
-              </li>
-            ))}
-          </ol>
-        </div>
+        <Stepper steps={STEPS} className="mt-14" />
       </div>
     </section>
   );

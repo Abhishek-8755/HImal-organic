@@ -8,7 +8,8 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"
-      className="group fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-40 flex h-14 items-center rounded-full bg-moss text-white shadow-lg shadow-forest/25 transition-[background-color,box-shadow] duration-300 hover:bg-forest hover:shadow-xl md:bottom-6 md:right-6"
+      // Slides away while another bottom bar is showing (useBottomBar sets html[data-bottom-bar])
+      className="group fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-40 flex h-14 items-center rounded-full bg-moss text-white shadow-lg shadow-forest/25 transition-[background-color,box-shadow,opacity,translate,visibility] duration-300 hover:bg-forest hover:shadow-xl md:bottom-6 md:right-6 [html[data-bottom-bar]_&]:invisible [html[data-bottom-bar]_&]:translate-y-24 [html[data-bottom-bar]_&]:opacity-0"
     >
       {/* Gentle pulse ring */}
       <span

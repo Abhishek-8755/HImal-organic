@@ -69,7 +69,7 @@ export default function Testimonials() {
               type="button"
               onClick={() => setPlaying(!isPlaying)}
               aria-label={isPlaying ? "Pause testimonials" : "Play testimonials"}
-              className="grid size-12 place-items-center rounded-full bg-forest text-cream transition-colors hover:bg-moss"
+              className="grid size-12 place-items-center rounded-full bg-forest text-cream transition-colors hover:bg-pine"
             >
               {isPlaying ? <Pause className="size-5" aria-hidden="true" /> : <Play className="size-5" aria-hidden="true" />}
             </button>

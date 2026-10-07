@@ -73,6 +73,13 @@ Use only APIs from these versions.
 ## Quality
 Fully responsive (375, 768, 1024, 1440), semantic HTML, alt text on all images, keyboard accessible, good color contrast, fast loading, no console errors.
 
+## Shared components (reuse before building new ones)
+- `ProductCard` (b2c light / b2b dark glass), `ProductGrid` (animated grid, `columns` 3 or 4), `PillGroup` (chips with a sliding active pill).
+- `QuoteModal` (bulk quote form → WhatsApp). On the B2B page it is driven by `b2b/QuoteProvider` (`useQuote()`: `openQuote(products)`, basket `toggle`/`isSelected`); `RequestQuoteButton` opens it from server-rendered sections.
+- `Stepper` (step timeline). From a Server Component pass `icon: <Truck />` elements, never components: functions can't cross to Client Components.
+- `useBottomBar(showing)` from `src/lib/`: any bar fixed to the bottom calls it, and the WhatsApp button hides itself.
+- Header: pages with a dark hero go in `DARK_PAGES` in `Header.js` (cream text, forest bar). The B2B page background is `bg-pine`.
+
 ## Rules
 - Make the minimum code needed. Do not add features I did not ask for. Do not invent backend calls.
 - Reuse the shared components in `src/components` before writing new ones.

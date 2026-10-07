@@ -71,7 +71,7 @@ export default function HomeHero() {
           <div className="mt-10 flex animate-rise flex-wrap gap-3 [animation-delay:360ms]">
             <Link
               href="/b2c"
-              className="group inline-flex min-h-13 items-center gap-2.5 rounded-full bg-forest px-7 font-semibold text-cream transition-colors hover:bg-moss"
+              className="group inline-flex min-h-13 items-center gap-2.5 rounded-full bg-forest px-7 font-semibold text-cream transition-colors hover:bg-pine"
             >
               Shop for Home
               <ArrowRight aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-1" />

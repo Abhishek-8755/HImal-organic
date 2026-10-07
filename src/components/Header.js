@@ -13,15 +13,17 @@ import { AUDIENCE_LINKS, CONTACT, NAV_LINKS } from "@/data/site";
 
 const EASE = [0.22, 1, 0.36, 1];
 
+// Pages with a dark hero: the header uses cream text and a forest bar
+const DARK_PAGES = ["/b2b"];
+
 function isActive(pathname, href) {
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-// "md" sits on the cream header; "lg" sits on the forest mobile menu
-function AudienceToggle({ pathname, layoutId, size = "md", onNavigate }) {
-  const onDark = size === "lg";
-  const pad = onDark ? "px-6 py-3 text-base" : "px-4 py-2 text-sm";
+// dark: on a forest background (dark pages, mobile menu). large: the mobile menu size.
+function AudienceToggle({ pathname, layoutId, dark = false, large = false, onNavigate }) {
+  const pad = large ? "px-6 py-3 text-base" : "px-4 py-2 text-sm";
   return (
     <div className="flex rounded-full bg-current/5 p-1 ring-1 ring-current/15">
       {AUDIENCE_LINKS.map((link) => {
@@ -33,13 +35,13 @@ function AudienceToggle({ pathname, layoutId, size = "md", onNavigate }) {
             onClick={onNavigate}
             aria-current={active ? "page" : undefined}
             className={`relative whitespace-nowrap rounded-full font-semibold transition-colors ${pad} ${
-              active ? (onDark ? "text-forest" : "text-cream") : "opacity-80 hover:opacity-100"
+              active ? (dark ? "text-forest" : "text-cream") : "opacity-80 hover:opacity-100"
             }`}
           >
             {active && (
               <motion.span
                 layoutId={layoutId}
-                className={`absolute inset-0 rounded-full ${onDark ? "bg-turmeric" : "bg-forest"}`}
+                className={`absolute inset-0 rounded-full ${dark ? "bg-turmeric" : "bg-forest"}`}
                 transition={{ duration: 0.45, ease: EASE }}
               />
             )}
@@ -60,6 +62,7 @@ export default function Header() {
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { scrollY } = useScroll();
+  const dark = DARK_PAGES.some((page) => isActive(pathname, page));
 
   useScrollLock(menuOpen);
 
@@ -94,9 +97,13 @@ export default function Header() {
         ref={headerRef}
         animate={{ y: visible ? "0%" : "-100%" }}
         transition={{ duration: 0.4, ease: EASE }}
-        className={`fixed inset-x-0 top-0 z-50 text-forest transition-[background-color,box-shadow] duration-300 ${
+        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,color] duration-300 ${
+          dark ? "text-cream" : "text-forest"
+        } ${
           scrolled
-            ? "bg-cream/80 shadow-[0_1px_0_rgb(31_61_43/0.08)] backdrop-blur-md"
+            ? dark
+              ? "bg-forest/85 shadow-[0_1px_0_rgb(246_241_231/0.1)] backdrop-blur-md"
+              : "bg-cream/80 shadow-[0_1px_0_rgb(31_61_43/0.08)] backdrop-blur-md"
             : "bg-transparent"
         }`}
       >
@@ -113,14 +120,14 @@ export default function Header() {
                       href={link.href}
                       aria-current={active ? "page" : undefined}
                       className={`relative whitespace-nowrap py-2 text-[0.95rem] font-medium transition-colors ${
-                        active ? "text-forest" : "text-forest/75 hover:text-forest"
+                        active ? "opacity-100" : "opacity-75 hover:opacity-100"
                       }`}
                     >
                       {link.label}
                       {active && (
                         <motion.span
                           layoutId="nav-underline"
-                          className="absolute inset-x-0 -bottom-0.5 h-0.5 rounded-full bg-moss"
+                          className={`absolute inset-x-0 -bottom-0.5 h-0.5 rounded-full ${dark ? "bg-turmeric" : "bg-moss"}`}
                           transition={{ duration: 0.45, ease: EASE }}
                         />
                       )}
@@ -134,7 +141,7 @@ export default function Header() {
           <div className="flex items-center gap-3">
             {/* Hidden from 1024 to 1279px, where the nav links need the room (B2C/B2B are links there) */}
             <div className="hidden md:block lg:hidden xl:block">
-              <AudienceToggle pathname={pathname} layoutId="audience-pill" />
+              <AudienceToggle pathname={pathname} layoutId="audience-pill" dark={dark} />
             </div>
             <button
               ref={menuButtonRef}
@@ -143,7 +150,7 @@ export default function Header() {
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
               aria-label="Open menu"
-              className="grid size-11 place-items-center rounded-full ring-1 ring-forest/15 transition-colors hover:bg-forest/5 lg:hidden"
+              className="grid size-11 place-items-center rounded-full ring-1 ring-current/20 transition-colors hover:bg-current/10 lg:hidden"
             >
               <Menu className="size-5" aria-hidden="true" />
             </button>
@@ -215,7 +222,7 @@ export default function Header() {
               transition={{ duration: 0.5, delay: 0.6 }}
               className="wrap flex flex-col gap-5 pb-10 pt-10"
             >
-              <AudienceToggle pathname={pathname} layoutId="audience-pill-mobile" size="lg" onNavigate={closeMenu} />
+              <AudienceToggle pathname={pathname} layoutId="audience-pill-mobile" dark large onNavigate={closeMenu} />
               <a
                 href={buildWhatsAppLink({ message: "I'd like to know more about your products." })}
                 target="_blank"

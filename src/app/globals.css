@@ -8,6 +8,7 @@
   --color-turmeric: #e0a526;
   --color-earth: #5b4636;
   --color-ink: #1b1b18;
+  --color-pine: #152a1e; /* deeper forest for the B2B page background */
 
   --font-display: var(--font-fraunces), Georgia, serif;
   --font-sans: var(--font-jakarta), system-ui, sans-serif;
@@ -25,7 +26,14 @@
   --animate-rise: rise 0.9s var(--ease-soft) both;
   --animate-shimmer: shimmer 1.4s linear infinite;
   --animate-float: float 7s ease-in-out infinite;
+  --animate-word: word-up 0.9s var(--ease-soft) both;
 
+  /* One word sliding up out of an overflow-hidden mask */
+  @keyframes word-up {
+    from {
+      transform: translateY(110%);
+    }
+  }
   @keyframes rise {
     from {
       opacity: 0;
@@ -120,6 +128,10 @@
     text-transform: uppercase;
     color: var(--color-earth);
   }
+  /* Static noise texture for dark sections (pair with an opacity + blend mode) */
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
   .no-scrollbar {
     scrollbar-width: none;
   }
@@ -142,7 +154,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .page-fade,
-  .animate-rise {
+  .animate-rise,
+  .animate-word {
     animation: none;
   }
 }
